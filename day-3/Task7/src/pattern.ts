@@ -32,6 +32,8 @@ sub.subscribe(log);
 //// COMMAND COMMAND COMMAND
 
 //link: https://medium.com/@robinviktorsson/a-guide-to-the-command-design-pattern-in-typescript-and-node-js-with-practical-examples-b7cd81804f79
+//link: https://www.youtube.com/watch?v=GQzfF5EMD7o
+//link: https://www.youtube.com/watch?v=9qA5kw8dcSU
 
 interface Command {
   execute(): void;
