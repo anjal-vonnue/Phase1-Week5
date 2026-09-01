@@ -45,7 +45,7 @@ vi.mock("../components/card.js", () => ({
 
     card.appendChild(titleEl);
     card.appendChild(descEl);
-    children.forEach((child) => {
+    children.forEach((child: HTMLElement) => {
       card.appendChild(child);
     });
 
@@ -77,22 +77,30 @@ describe("testing list page", () => {
     vi.clearAllMocks();
     document.body.innerHTML = "";
   });
+
+  const router = {
+    register: () => {},
+    navigate: () => {},
+    changeRoute: () => {},
+  };
   test("--- testing heading", () => {
     const state = {
       todos: [],
+      route: "/home",
     };
 
-    const section = renderList(state, {});
+    const section = renderList(state, router);
 
-    expect(section.querySelector("h3").textContent).toBe("All Tasks");
+    expect(section.querySelector("h3")?.textContent).toBe("All Tasks");
   });
 
   test("--- Add, edit buttons rendering", () => {
     const state = {
       todos: [],
+      route: "/home",
     };
 
-    const section = renderList(state, {});
+    const section = renderList(state, router);
     expect(section.textContent).toContain("ADD TASK");
     expect(section.textContent).toContain("EDIT TASK");
   });
@@ -122,9 +130,10 @@ describe("testing list page", () => {
           status: "completed",
         },
       ],
+      route: "/home",
     };
 
-    const section = renderList(state, {});
+    const section = renderList(state, router);
     const card = section.querySelectorAll(".card");
     expect(card[0].textContent).toContain("go buy a laptop");
     expect(card[1].textContent).toContain("wash clothes");
@@ -141,9 +150,10 @@ describe("testing list page", () => {
           status: "completed",
         },
       ],
+      route: "/home",
     };
 
-    const section = renderList(state, {});
+    const section = renderList(state, router);
 
     const buttons = section.querySelectorAll(
       ".card button",

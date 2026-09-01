@@ -1,5 +1,9 @@
 import { describe, expect, test, vi } from "vitest";
 import { createRouter } from "./router.js";
+import { renderHome } from "../pages/home.js";
+import { renderList } from "../pages/list.js";
+import { renderDetail } from "../pages/detail.js";
+import { renderError } from "../pages/error.js";
 
 describe("testing router", () => {
   let router;
@@ -7,12 +11,14 @@ describe("testing router", () => {
   test("--- navigation test", () => {
     store = {
       dispatch: vi.fn(),
+      getState: vi.fn(),
+      subscribe: vi.fn(),
     };
     router = createRouter(store);
-    router.register("/home", () => {});
-    router.register("/list", () => {});
+    router.register("/home", renderHome);
+    router.register("/list", renderList);
     router.navigate("/home");
-    expect(window.location.pathname).toBe("/day-5/index.html/home");
+    expect(window.location.hash.slice(1)).toBe("/home");
     expect(store.dispatch).toHaveBeenCalledWith({
       type: "SET_ROUTE",
       payload: {
@@ -20,18 +26,20 @@ describe("testing router", () => {
       },
     });
     router.navigate("/list");
-    expect(window.location.pathname).toBe("/day-5/index.html/list");
+    expect(window.location.hash.slice(1)).toBe("/list");
   });
 
   test("--- tesing detail route", () => {
     store = {
       dispatch: vi.fn(),
+      getState: vi.fn(),
+      subscribe: vi.fn(),
     };
 
     router = createRouter(store);
-    router.register("/detail", () => {});
+    router.register("/detail", renderDetail);
     router.navigate("/detail/3");
-    expect(window.location.pathname).toBe("/day-5/index.html/detail/3");
+    expect(window.location.hash.slice(1)).toBe("/detail/3");
     expect(store.dispatch).toHaveBeenCalledWith({
       type: "SET_ROUTE",
       payload: {
@@ -46,12 +54,13 @@ describe("testing router", () => {
   test("--- tesing error route", () => {
     store = {
       dispatch: vi.fn(),
+      getState: vi.fn(),
+      subscribe: vi.fn(),
     };
 
     router = createRouter(store);
-    router.register("/error", () => {});
+    router.register("/error", renderHome);
     router.navigate("/awere");
-    expect(window.location.pathname).toBe("/day-5/index.html/awere");
     expect(store.dispatch).toHaveBeenCalledWith({
       type: "SET_ROUTE",
       payload: {

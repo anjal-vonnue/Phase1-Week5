@@ -1,5 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 import { renderHome } from "./home";
+import { createRouter } from "../router/router";
 
 const mocks = vi.hoisted(() => {
   return {
@@ -52,7 +53,7 @@ vi.mock("../components/card.js", () => ({
 
     card.appendChild(titleEl);
     card.appendChild(descEl);
-    children.forEach((child) => {
+    children.forEach((child: HTMLElement) => {
       card.appendChild(child);
     });
 
@@ -61,6 +62,11 @@ vi.mock("../components/card.js", () => ({
 }));
 
 describe("testing home page", () => {
+  const router = {
+    register: () => {},
+    navigate: () => {},
+    changeRoute: () => {},
+  };
   test("---testing home rendered", () => {
     const state = {
       todos: [
@@ -72,9 +78,10 @@ describe("testing home page", () => {
           status: "completed",
         },
       ],
+      route: "/home",
     };
 
-    const section = renderHome(state, {});
+    const section = renderHome(state, router);
 
     expect(section.textContent).toContain("Total Tasks: 1");
   });
@@ -90,9 +97,10 @@ describe("testing home page", () => {
           status: "completed",
         },
       ],
+      route: "/home",
     };
 
-    const section = renderHome(state, {});
+    const section = renderHome(state, router);
 
     const buttons = section.querySelectorAll(
       ".card button",

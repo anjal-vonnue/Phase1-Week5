@@ -4,8 +4,16 @@ import { createStore } from "./store";
 describe("testing store", () => {
   let store;
   const initialState = {
-    name: "anjal",
-    age: 22,
+    todos: [
+      {
+        id: 1,
+        title: "go buy a laptop",
+        description: "buy from ernalkulam",
+        createdAt: Date.now() - 5000,
+        status: "completed",
+      },
+    ],
+    route: "/home",
   };
   let reducer = vi.fn();
   let listener = vi.fn();
