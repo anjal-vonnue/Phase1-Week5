@@ -1,3 +1,13 @@
+interface CardInterface {
+  id: number;
+  title: string;
+  description: string;
+  createdAt: string;
+  status: "compeleted" | "pending";
+  children: HTMLElement[];
+  router: any;
+}
+
 export function Card({
   id,
   title,
@@ -6,7 +16,7 @@ export function Card({
   status,
   children = [],
   router = null,
-}) {
+}: CardInterface) {
   const article = document.createElement("article");
   article.className = "task";
 

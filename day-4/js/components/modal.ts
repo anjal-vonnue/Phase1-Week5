@@ -1,5 +1,13 @@
 import { store } from "../main.js";
 
+interface TodoInterface {
+  id: number;
+  title: string;
+  description: string;
+  createdAt?: number;
+  status?: string;
+}
+
 type ModalType = "add" | "edit";
 
 export function Modal(type: ModalType) {
@@ -46,12 +54,12 @@ export function Modal(type: ModalType) {
     const descriptionValue = descriptionEl.value;
 
     try {
-      if (type === "add") {
+      if (type === "add" && submitButton) {
         submitButton.textContent = "Loading...";
 
         const state = store.getState();
         const todos = state.todos;
-        const idArray = todos.map((todo) => todo.id);
+        const idArray = todos.map((todo: TodoInterface) => todo.id);
         const nextId = todos.length > 0 ? Math.max(...idArray) + 1 : 1;
 
         const todo = {
@@ -67,7 +75,7 @@ export function Modal(type: ModalType) {
         console.log("Form submitted");
       }
 
-      if (type === "edit") {
+      if (type === "edit" && submitButton) {
         const idEl = modal.querySelector("#todo-id") as HTMLInputElement;
         const idValue = idEl.value;
         submitButton.textContent = "Editing...";
@@ -83,20 +91,25 @@ export function Modal(type: ModalType) {
         console.log("task edit submitted");
       }
     } catch (error) {
-      alert(error.message);
-      submitButton.textContent = "RETRY";
+      if (error instanceof Error) {
+        alert(error.message);
+        if (submitButton) submitButton.textContent = "RETRY";
+      } else {
+        console.log("error occured while handling submit");
+      }
     }
   }
+  if (form)
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+      await handleSubmit();
+    });
 
-    await handleSubmit();
-  });
-
-  closeButton.addEventListener("click", () => {
-    modal.remove();
-  });
+  if (closeButton)
+    closeButton.addEventListener("click", () => {
+      modal.remove();
+    });
 
   modal.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
@@ -108,7 +121,7 @@ export function Modal(type: ModalType) {
   return modal;
 }
 
-function addTodo(todo) {
+function addTodo(todo: TodoInterface) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const success = Math.random() < 0.5;
@@ -127,7 +140,7 @@ function addTodo(todo) {
   });
 }
 
-function editTodo(todo) {
+function editTodo(todo: TodoInterface) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const success = Math.random() < 0.5;
