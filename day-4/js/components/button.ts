@@ -4,8 +4,8 @@ interface ButtonInterface {
   text: string;
   onClick: Function;
   type: ButtonType;
-  className: string;
-  id: number;
+  className?: string;
+  id?: number | string;
 }
 
 export function Button({

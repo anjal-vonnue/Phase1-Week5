@@ -1,8 +1,11 @@
-export function reducer(state, action) {
+import { ActionInterface, StateInterface } from "../types/taskTypes";
+
+export function reducer(state: StateInterface, action: ActionInterface) {
   switch (action.type) {
     case "SET_ROUTE": {
       // console.log("inside reducer with: ", action.payload);
-
+      if (action.payload.params) {
+      }
       return {
         ...state,
         route: action.payload.route,
@@ -53,9 +56,9 @@ export function reducer(state, action) {
     }
 
     case "TASK_UNDO": {
-      let currentStatus = state.todos.find(
-        (todo) => todo.id === action.payload.id,
-      ).status;
+      let todObj = state.todos.find((todo) => todo.id === action.payload.id);
+
+      let currentStatus = todObj?.status;
 
       if (currentStatus === "pending") {
         currentStatus = "completed";

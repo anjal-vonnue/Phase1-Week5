@@ -1,11 +1,11 @@
 interface CardInterface {
-  id: number;
+  id: number | string;
   title: string;
   description: string;
-  createdAt: string;
-  status: "compeleted" | "pending";
+  createdAt?: string | number;
+  status?: "compeleted" | "pending" | string;
   children: HTMLElement[];
-  router: any;
+  router?: any;
 }
 
 export function Card({

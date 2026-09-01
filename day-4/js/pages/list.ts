@@ -2,8 +2,9 @@ import { Button } from "../components/button.js";
 import { Card } from "../components/card.js";
 import { Modal } from "../components/modal.js";
 import { app, store } from "../main.js";
+import { RouterInterface, StateInterface } from "../types/taskTypes.js";
 
-export function renderList(state, router) {
+export function renderList(state: StateInterface, router: RouterInterface) {
   const section = document.createElement("section");
   section.className = "section-container";
 
@@ -33,7 +34,9 @@ export function renderList(state, router) {
   heading.textContent = "All Tasks";
   allTaskDiv.appendChild(heading);
 
-  const sortedTodos = state.todos.sort((a, b) => b.createdAt - a.createdAt);
+  const sortedTodos = state.todos.sort(
+    (a, b) => (b.createdAt as number) - (a.createdAt as number),
+  );
 
   sortedTodos.forEach((todo) => {
     const completeButton = Button({
@@ -77,26 +80,34 @@ export function renderList(state, router) {
 }
 
 function addTask() {
-  console.log("add task clicked");
-  const modal = Modal("add");
-  app.appendChild(modal);
-  const firstInput = modal.querySelector("input");
-  console.log(firstInput);
+  if (app) {
+    console.log("add task clicked");
+    const modal = Modal("add");
+    app.appendChild(modal);
+    const firstInput = modal.querySelector("input");
+    console.log(firstInput);
 
-  firstInput?.focus();
+    firstInput?.focus();
+  } else {
+    console.log("ERROR: app is null");
+  }
 }
 
 function editTask() {
-  console.log("edit task button");
-  const modal = Modal("edit");
-  app.appendChild(modal);
-  const firstInput = modal.querySelector("input");
-  console.log(firstInput);
+  if (app) {
+    console.log("edit task button");
+    const modal = Modal("edit");
+    app.appendChild(modal);
+    const firstInput = modal.querySelector("input");
+    console.log(firstInput);
 
-  firstInput?.focus();
+    firstInput?.focus();
+  } else {
+    console.log("ERROR: app is null");
+  }
 }
 
-function completeTask(id) {
+function completeTask(id: number | string) {
   console.log("task completed: ", id);
   store.dispatch({
     type: "TASK_COMPLETED",
@@ -106,7 +117,7 @@ function completeTask(id) {
   });
 }
 
-function undoTask(id) {
+function undoTask(id: string | number) {
   console.log("task undone: ", id);
 
   store.dispatch({
@@ -117,7 +128,7 @@ function undoTask(id) {
   });
 }
 
-function deleteTask(id) {
+function deleteTask(id: string | number) {
   console.log("task deleted: ", id);
   store.dispatch({
     type: "TASK_DELETE",

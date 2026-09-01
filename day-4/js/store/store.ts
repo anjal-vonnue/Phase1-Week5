@@ -1,12 +1,21 @@
-export function createStore(initialState, reducer) {
-  let state = initialState;
-  const listeners = [];
+import {
+  ActionInterface,
+  ReducerType,
+  StateInterface,
+} from "../types/taskTypes";
 
-  function getState() {
+export function createStore(
+  initialState: StateInterface,
+  reducer: ReducerType,
+) {
+  let state = initialState;
+  const listeners: (() => void)[] = [];
+
+  function getState(): StateInterface {
     return state;
   }
 
-  function dispatch(action) {
+  function dispatch(action: ActionInterface) {
     state = reducer(state, action);
 
     localStorage.setItem("task-spa", JSON.stringify(state));
@@ -21,7 +30,7 @@ export function createStore(initialState, reducer) {
     });
   }
 
-  function subscribe(listener) {
+  function subscribe(listener: () => void) {
     listeners.push(listener);
   }
 

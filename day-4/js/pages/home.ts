@@ -1,8 +1,9 @@
 import { Button } from "../components/button.js";
 import { Card } from "../components/card.js";
 import { store } from "../main.js";
+import { RouterInterface, StateInterface } from "../types/taskTypes.js";
 
-export function renderHome(state, router) {
+export function renderHome(state: StateInterface, router: RouterInterface) {
   console.log("this is home page");
 
   const homeSection = document.createElement("section");
@@ -19,7 +20,7 @@ export function renderHome(state, router) {
   const taskSum = document.createElement("span");
   taskSum.id = "task-sum";
   //todo: change
-  taskSum.textContent = state.todos.length;
+  taskSum.textContent = String(state.todos.length);
   tasksCreated.appendChild(taskSum);
   totalTaskDiv.appendChild(tasksCreated);
 
@@ -36,7 +37,7 @@ export function renderHome(state, router) {
     (todo) => todo.status === "completed",
   ).length;
 
-  completedSpan.textContent = completedCount;
+  completedSpan.textContent = String(completedCount);
   tasksCompleted.appendChild(completedSpan);
 
   const tasksPending = document.createElement("h3");
@@ -48,7 +49,7 @@ export function renderHome(state, router) {
     (todo) => todo.status === "pending",
   ).length;
 
-  pendingSpan.textContent = pendingCount;
+  pendingSpan.textContent = String(pendingCount);
   tasksPending.appendChild(pendingSpan);
 
   tasksStatus.appendChild(tasksCompleted);
@@ -65,7 +66,7 @@ export function renderHome(state, router) {
   recentTasksDiv.appendChild(recentHeading);
 
   const recentTodos = state.todos
-    .sort((a, b) => b.createdAt - a.createdAt)
+    .sort((a, b) => (b.createdAt as number) - (a.createdAt as number))
     .slice(0, 7);
 
   recentTodos.forEach((todo) => {
@@ -108,7 +109,7 @@ export function renderHome(state, router) {
   return homeSection;
 }
 
-function completeTask(id) {
+function completeTask(id: string | number) {
   console.log("task completed: ", id);
   store.dispatch({
     type: "TASK_COMPLETED",
@@ -118,7 +119,7 @@ function completeTask(id) {
   });
 }
 
-function undoTask(id) {
+function undoTask(id: string | number) {
   console.log("task undone: ", id);
 
   store.dispatch({
@@ -129,7 +130,7 @@ function undoTask(id) {
   });
 }
 
-function deleteTask(id) {
+function deleteTask(id: string | number) {
   console.log("task deleted: ", id);
   store.dispatch({
     type: "TASK_DELETE",

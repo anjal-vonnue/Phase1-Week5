@@ -1,14 +1,15 @@
 import { Button } from "../components/button.js";
 import { Card } from "../components/card.js";
 import { router, store } from "../main.js";
+import { StateInterface, TodoInterface } from "../types/taskTypes.js";
 
-export function renderDetail(state) {
+export function renderDetail(state: StateInterface) {
   console.log("state: ", state);
 
-  const id = state.params.id;
+  const id = state.params?.id ? state.params.id : -1;
   console.log("id: ", id);
 
-  const todo = state.todos.find((todo) => {
+  const todo = state.todos.find((todo: TodoInterface) => {
     console.log("todo: ", todo);
 
     if (todo.id === Number(id)) {
@@ -78,7 +79,7 @@ export function renderDetail(state) {
   return section;
 }
 
-function completeTask(id) {
+function completeTask(id: number) {
   console.log("task completed: ", id);
   store.dispatch({
     type: "TASK_COMPLETED",
@@ -88,7 +89,7 @@ function completeTask(id) {
   });
 }
 
-function undoTask(id) {
+function undoTask(id: number) {
   console.log("task undone: ", id);
 
   store.dispatch({
@@ -99,7 +100,7 @@ function undoTask(id) {
   });
 }
 
-function deleteTask(id) {
+function deleteTask(id: number) {
   console.log("task deleted: ", id);
   store.dispatch({
     type: "TASK_DELETE",

@@ -1,11 +1,17 @@
-// import { store } from "../main.js";
+import {
+  RouteInterface,
+  RouterInterface,
+  StateInterface,
+  StoreInterface,
+} from "../types/taskTypes";
 
-// console.log("router.js");
+export function createRouter(store: StoreInterface) {
+  const routes: RouteInterface[] = [];
 
-export function createRouter(store) {
-  const routes = [];
-
-  function register(path, component) {
+  function register(
+    path: string,
+    component: (state: StateInterface, router: RouterInterface) => HTMLElement,
+  ) {
     // console.log("path: " + path + " component: " + component);
 
     routes.push({
@@ -14,9 +20,8 @@ export function createRouter(store) {
     });
   }
 
-  function navigate(path) {
+  function navigate(path: string): void {
     const url = `/Phase1-Week4/day-5/#${path}`;
-
     console.log("===url: ", url);
 
     window.history.pushState({}, "", url);
@@ -79,7 +84,7 @@ export function createRouter(store) {
     }
   }
 
-  function getCurrentPath() {
+  function getCurrentPath(): string {
     const pathname = window.location.hash.slice(1);
 
     if (pathname) {

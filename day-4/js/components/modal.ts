@@ -1,12 +1,5 @@
 import { store } from "../main.js";
-
-interface TodoInterface {
-  id: number;
-  title: string;
-  description: string;
-  createdAt?: number;
-  status?: string;
-}
+import { TodoInterface } from "../types/taskTypes.js";
 
 type ModalType = "add" | "edit";
 
@@ -59,7 +52,10 @@ export function Modal(type: ModalType) {
 
         const state = store.getState();
         const todos = state.todos;
-        const idArray = todos.map((todo: TodoInterface) => todo.id);
+        // const idArray = todos.map((todo: TodoInterface) => todo.id);
+        const idArray = todos
+          .map((todo) => todo.id)
+          .filter((id) => typeof id === "number");
         const nextId = todos.length > 0 ? Math.max(...idArray) + 1 : 1;
 
         const todo = {

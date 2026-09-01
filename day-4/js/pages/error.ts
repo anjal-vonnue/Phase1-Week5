@@ -1,7 +1,8 @@
 import { Button } from "../components/button.js";
 import { store } from "../main.js";
+import { RouterInterface } from "../types/taskTypes.js";
 
-export function renderError(router) {
+export function renderError(router: RouterInterface) {
   function backBtnFn() {
     router.navigate("/home");
   }

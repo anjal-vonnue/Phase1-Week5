@@ -6,6 +6,7 @@ import { renderSettings } from "./pages/settings.js";
 import { createRouter } from "./router/router.js";
 import { reducer } from "./store/reducer.js";
 import { createStore } from "./store/store.js";
+import { RouteInterface, RouterInterface } from "./types/taskTypes.js";
 
 // console.log("hello world");
 
@@ -63,7 +64,7 @@ store.subscribe(renderFn);
 //   payload: initialState,
 // });
 
-export const router = createRouter(store);
+export const router: RouterInterface = createRouter(store);
 
 router.register("/home", renderHome);
 router.register("/list", renderList);
@@ -81,8 +82,7 @@ navALink.forEach((aTag) => {
     e.preventDefault();
     const href = aTag.getAttribute("href");
     console.log("a tag clicked: ", href);
-
-    router.navigate(href);
+    if (href) router.navigate(href);
   });
 });
 
@@ -91,7 +91,7 @@ function renderFn() {
 
   const state = store.getState();
 
-  let child;
+  let child: HTMLElement;
 
   switch (state.route) {
     case "/home": {
@@ -123,6 +123,5 @@ function renderFn() {
       child = renderHome(state, router);
     }
   }
-
-  app.replaceChildren(child);
+  if (app) app.replaceChildren(child);
 }
