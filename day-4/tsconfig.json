@@ -7,8 +7,10 @@
     "outDir": "./dist",
     "rootDir": "./js",
 
-    "allowJs": true,
-    "checkJs": true,
+    "declaration": true,
+
+    // "allowJs": true,
+    // "checkJs": true,
 
     "paths": {
       "@pages/*": ["./js/pages/*"],
