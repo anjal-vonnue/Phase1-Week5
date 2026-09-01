@@ -1,7 +1,7 @@
-import { Button } from "../components/button.js";
-import { Card } from "../components/card.js";
+import { Button } from "@components/button.js";
 import { store } from "../main.js";
-import { RouterInterface, StateInterface } from "../types/taskTypes.js";
+import type { RouterInterface, StateInterface } from "../types/taskTypes.js";
+import { Card } from "@components/card.js";
 
 export function renderHome(state: StateInterface, router: RouterInterface) {
   console.log("this is home page");

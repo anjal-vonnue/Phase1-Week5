@@ -1,7 +1,7 @@
-import { Button } from "../components/button.js";
-import { Card } from "../components/card.js";
+import { Button } from "@components/button.js";
 import { router, store } from "../main.js";
-import { StateInterface, TodoInterface } from "../types/taskTypes.js";
+import type { StateInterface, TodoInterface } from "../types/taskTypes.js";
+import { Card } from "@components/card.js";
 
 export function renderDetail(state: StateInterface) {
   console.log("state: ", state);

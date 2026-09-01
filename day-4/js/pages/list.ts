@@ -1,8 +1,8 @@
-import { Button } from "../components/button.js";
-import { Card } from "../components/card.js";
-import { Modal } from "../components/modal.js";
+import { Button } from "@components/button.js";
 import { app, store } from "../main.js";
-import { RouterInterface, StateInterface } from "../types/taskTypes.js";
+import type { RouterInterface, StateInterface } from "../types/taskTypes.js";
+import { Modal } from "@components/modal.js";
+import { Card } from "@components/card.js";
 
 export function renderList(state: StateInterface, router: RouterInterface) {
   const section = document.createElement("section");

@@ -1,4 +1,4 @@
-import { ActionInterface, StateInterface } from "../types/taskTypes";
+import type { ActionInterface, StateInterface } from "../types/taskTypes";
 
 export function reducer(state: StateInterface, action: ActionInterface) {
   switch (action.type) {

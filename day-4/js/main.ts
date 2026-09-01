@@ -1,12 +1,12 @@
-import { renderDetail } from "./pages/detail.js";
-import { renderError } from "./pages/error.js";
-import { renderHome } from "./pages/home.js";
-import { renderList } from "./pages/list.js";
-import { renderSettings } from "./pages/settings.js";
 import { createRouter } from "./router/router.js";
 import { reducer } from "./store/reducer.js";
 import { createStore } from "./store/store.js";
-import { RouteInterface, RouterInterface } from "./types/taskTypes.js";
+import type { RouterInterface } from "./types/taskTypes.js";
+import { renderList } from "@pages/list.js";
+import { renderHome } from "@pages/home.js";
+import { renderDetail } from "@pages/detail.js";
+import { renderSettings } from "@pages/settings.js";
+import { renderError } from "@pages/error.js";
 
 // console.log("hello world");
 
@@ -67,7 +67,9 @@ store.subscribe(renderFn);
 export const router: RouterInterface = createRouter(store);
 
 router.register("/home", renderHome);
+
 router.register("/list", renderList);
+
 router.register("/detail", renderDetail);
 router.register("/settings", renderSettings);
 

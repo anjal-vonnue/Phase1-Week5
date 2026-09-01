@@ -1,6 +1,6 @@
-import { Button } from "../components/button.js";
+import { Button } from "@components/button.js";
 import { store } from "../main.js";
-import { StateInterface } from "../types/taskTypes.js";
+import type { StateInterface } from "../types/taskTypes.js";
 
 export function renderSettings(state: StateInterface) {
   console.log("this is settting page");

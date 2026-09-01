@@ -3,10 +3,17 @@
     "strict": true,
     "target": "es2022",
     "module": "es2022",
+
     "outDir": "./dist",
     "rootDir": "./js",
+
     "allowJs": true,
-    "checkJs": true
+    "checkJs": true,
+
+    "paths": {
+      "@pages/*": ["./js/pages/*"],
+      "@components/*": ["./js/components/*"]
+    }
   },
-  "include": ["js"]
+  "include": ["js/**/*"]
 }

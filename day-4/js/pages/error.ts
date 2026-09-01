@@ -1,6 +1,5 @@
-import { Button } from "../components/button.js";
-import { store } from "../main.js";
-import { RouterInterface } from "../types/taskTypes.js";
+import { Button } from "@components/button.js";
+import type { RouterInterface } from "../types/taskTypes.js";
 
 export function renderError(router: RouterInterface) {
   function backBtnFn() {

@@ -1,5 +1,5 @@
 import { store } from "../main.js";
-import { TodoInterface } from "../types/taskTypes.js";
+import type { TodoInterface } from "../types/taskTypes.js";
 
 type ModalType = "add" | "edit";
 
