@@ -1,3 +1,5 @@
+import { RouterInterface } from "../types/taskTypes";
+
 interface CardInterface {
   id: number | string;
   title: string;
@@ -5,7 +7,7 @@ interface CardInterface {
   createdAt?: string | number;
   status?: "compeleted" | "pending" | string;
   children: HTMLElement[];
-  router?: any;
+  router?: RouterInterface;
 }
 
 export function Card({
@@ -15,7 +17,7 @@ export function Card({
   createdAt,
   status,
   children = [],
-  router = null,
+  router,
 }: CardInterface) {
   const article = document.createElement("article");
   article.className = "task";
@@ -42,7 +44,7 @@ export function Card({
   cardContent.appendChild(cardDescription);
   cardContent.appendChild(createdAtP);
   cardContent.appendChild(statusP);
-  if (router !== null) {
+  if (router) {
     cardContent.addEventListener("click", (e) => {
       router.navigate(`/detail/${id}`);
     });
