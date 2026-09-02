@@ -3,7 +3,6 @@ import { createRouter } from "./router.js";
 import { renderHome } from "../pages/home.js";
 import { renderList } from "../pages/list.js";
 import { renderDetail } from "../pages/detail.js";
-import { renderError } from "../pages/error.js";
 
 describe("testing router", () => {
   let router;

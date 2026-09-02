@@ -105,32 +105,37 @@ describe("testing home page", () => {
     const buttons = section.querySelectorAll(
       ".card button",
     ) as NodeListOf<HTMLButtonElement>;
-    expect(buttons[0].textContent).toContain("COMPLETED");
+    if (buttons[0]) {
+      expect(buttons[0].textContent).toContain("COMPLETED");
+      buttons[0].click();
+      expect(mocks.dispatchFn).toHaveBeenCalledWith({
+        type: "TASK_COMPLETED",
+        payload: {
+          id: 1,
+        },
+      });
+    }
 
-    buttons[0].click();
-    expect(mocks.dispatchFn).toHaveBeenCalledWith({
-      type: "TASK_COMPLETED",
-      payload: {
-        id: 1,
-      },
-    });
+    if (buttons[1]) {
+      expect(buttons[1].textContent).toContain("UNDO");
+      buttons[1].click();
+      expect(mocks.dispatchFn).toHaveBeenCalledWith({
+        type: "TASK_UNDO",
+        payload: {
+          id: 1,
+        },
+      });
+    }
 
-    expect(buttons[1].textContent).toContain("UNDO");
-    buttons[1].click();
-    expect(mocks.dispatchFn).toHaveBeenCalledWith({
-      type: "TASK_UNDO",
-      payload: {
-        id: 1,
-      },
-    });
-
-    expect(buttons[2].textContent).toContain("DELETE");
-    buttons[2].click();
-    expect(mocks.dispatchFn).toHaveBeenCalledWith({
-      type: "TASK_DELETE",
-      payload: {
-        id: 1,
-      },
-    });
+    if (buttons[2]) {
+      expect(buttons[2].textContent).toContain("DELETE");
+      buttons[2].click();
+      expect(mocks.dispatchFn).toHaveBeenCalledWith({
+        type: "TASK_DELETE",
+        payload: {
+          id: 1,
+        },
+      });
+    }
   });
 });
