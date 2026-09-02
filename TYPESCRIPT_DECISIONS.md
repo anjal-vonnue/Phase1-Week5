@@ -3,3 +3,5 @@
 - Made the params property of StateInterface optional because it is only required when routing to the detail route.
 - Created separate files for the card and button types because they are not used elsewhere.
 - Used generics in ApiResponse so that it can return a response based on the type of the value.
+
+--test pr
