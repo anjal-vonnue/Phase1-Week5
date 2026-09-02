@@ -20,7 +20,7 @@ describe("testing api", () => {
       new Response(JSON.stringify(user)),
     );
 
-    const api = new ApiClient<User>();
+    const api = new ApiClient();
 
     const result = await api.get<User>("/user/3");
     expect(result).toEqual(user);
