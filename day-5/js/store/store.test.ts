@@ -15,8 +15,8 @@ describe("testing store", () => {
     ],
     route: "/home",
   };
-  let reducer = vi.fn();
-  let listener = vi.fn();
+  const reducer = vi.fn();
+  const listener = vi.fn();
   test("--- testing getState", () => {
     store = createStore(initialState, reducer);
 

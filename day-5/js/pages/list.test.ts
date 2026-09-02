@@ -9,7 +9,7 @@ const mocks = vi.hoisted(() => {
 
 vi.mock("../components/button.js", () => ({
   Button: vi.fn(({ id, text, onClick, type, className }) => {
-    let button = document.createElement("button") as HTMLButtonElement;
+    const button = document.createElement("button") as HTMLButtonElement;
     if (text) {
       button.textContent = text;
     }

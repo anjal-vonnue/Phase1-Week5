@@ -55,7 +55,7 @@ export function reducer(state: StateInterface, action: ActionInterface) {
     }
 
     case "TASK_UNDO": {
-      let todObj = state.todos.find((todo) => todo.id === action.payload.id);
+      const todObj = state.todos.find((todo) => todo.id === action.payload.id);
 
       let currentStatus = todObj?.status;
 

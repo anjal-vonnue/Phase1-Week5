@@ -3,7 +3,7 @@ export interface ApiResponse<T> {
   status: number;
   message?: string;
 }
-export class ApiClient<T> {
+export class ApiClient {
   async get<T>(url: string): Promise<T> {
     const response = await fetch(url);
     if (!response.ok) {
