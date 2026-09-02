@@ -12,8 +12,6 @@ export function createRouter(store: StoreInterface) {
     path: string,
     component: (state: StateInterface, router: RouterInterface) => HTMLElement,
   ) {
-    // console.log("path: " + path + " component: " + component);
-
     routes.push({
       path: path,
       component: component,
@@ -31,7 +29,6 @@ export function createRouter(store: StoreInterface) {
   function changeRoute() {
     let flag = 0;
     const currentPath = getCurrentPath();
-    // console.log("current path: ", currentPath);
 
     if (currentPath.startsWith("/detail")) {
       const id = currentPath.slice("/detail/".length);
@@ -39,8 +36,7 @@ export function createRouter(store: StoreInterface) {
         if ("/detail" === route.path) {
           flag = 1;
           console.log("deatil route");
-          // change this to state Mangements (below code)
-          // route.component(id);
+
           store.dispatch({
             type: "SET_ROUTE",
             payload: {
@@ -50,7 +46,6 @@ export function createRouter(store: StoreInterface) {
               },
             },
           });
-          // console.log("==== dispatch called with params:  ", id);
         }
       });
       console.log("id: " + id, " type: " + typeof id);
@@ -58,9 +53,6 @@ export function createRouter(store: StoreInterface) {
       routes.forEach((route) => {
         console.log("check: ", currentPath === route.path);
         if (currentPath === route.path) {
-          // change this to state Mangements (below code)
-          // route.component();
-
           flag = 1;
 
           store.dispatch({

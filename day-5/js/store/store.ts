@@ -20,11 +20,6 @@ export function createStore(
 
     localStorage.setItem("task-spa", JSON.stringify(state));
 
-    // console.log("===========");
-    // console.log("state in the store");
-    // console.log(state);
-    // console.log("===========");
-
     listeners.forEach((listener) => {
       listener();
     });

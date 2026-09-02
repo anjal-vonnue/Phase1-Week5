@@ -8,8 +8,6 @@ import { renderDetail } from "@pages/detail.js";
 import { renderSettings } from "@pages/settings.js";
 import { renderError } from "@pages/error.js";
 
-// console.log("hello world");
-
 export const app = document.getElementById("app");
 
 const fristState = {
@@ -58,11 +56,6 @@ function loadState() {
 const initialState = loadState();
 export const store = createStore(initialState, reducer);
 store.subscribe(renderFn);
-
-// store.dispatch({
-//   type: "SET_ROUTE",
-//   payload: initialState,
-// });
 
 export const router: RouterInterface = createRouter(store);
 

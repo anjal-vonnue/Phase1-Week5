@@ -52,7 +52,7 @@ export function Modal(type: ModalType) {
 
         const state = store.getState();
         const todos = state.todos;
-        // const idArray = todos.map((todo: TodoInterface) => todo.id);
+
         const idArray = todos
           .map((todo) => todo.id)
           .filter((id) => typeof id === "number");

@@ -3,7 +3,6 @@ import type { ActionInterface, StateInterface } from "../types/taskTypes";
 export function reducer(state: StateInterface, action: ActionInterface) {
   switch (action.type) {
     case "SET_ROUTE": {
-      // console.log("inside reducer with: ", action.payload);
       if (action.payload.params) {
       }
       return {

@@ -64,7 +64,6 @@ export interface RouteInterface {
 }
 
 export interface RouterInterface {
-  //   register: (path: string, component: () => void) => void;
   register: (
     path: string,
     component: (state: StateInterface, router: RouterInterface) => HTMLElement,

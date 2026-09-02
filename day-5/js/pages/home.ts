@@ -82,7 +82,7 @@ export function renderHome(state: StateInterface, router: RouterInterface) {
   tasksCreated.textContent = "Total Tasks: ";
   const taskSum = document.createElement("span");
   taskSum.id = "task-sum";
-  //todo: change
+
   taskSum.textContent = String(state.todos.length);
   tasksCreated.appendChild(taskSum);
   totalTaskDiv.appendChild(tasksCreated);
