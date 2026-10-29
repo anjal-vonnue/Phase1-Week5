@@ -1,0 +1,103 @@
+import type {
+  RouteInterface,
+  RouterInterface,
+  StateInterface,
+  StoreInterface,
+} from "../types/taskTypes";
+
+export function createRouter(store: StoreInterface) {
+  const routes: RouteInterface[] = [];
+
+  function register(
+    path: string,
+    component: (state: StateInterface, router: RouterInterface) => HTMLElement,
+  ) {
+    routes.push({
+      path: path,
+      component: component,
+    });
+  }
+
+  function navigate(path: string): void {
+    const url = `/Phase1-Week4/day-5/#${path}`;
+    console.log("===url: ", url);
+
+    window.history.pushState({}, "", url);
+    changeRoute();
+  }
+
+  function changeRoute() {
+    let flag = 0;
+    const currentPath = getCurrentPath();
+
+    if (currentPath.startsWith("/detail")) {
+      const id = currentPath.slice("/detail/".length);
+      routes.forEach((route) => {
+        if ("/detail" === route.path) {
+          flag = 1;
+          console.log("deatil route");
+
+          store.dispatch({
+            type: "SET_ROUTE",
+            payload: {
+              route: "/detail",
+              params: {
+                id: id,
+              },
+            },
+          });
+        }
+      });
+      console.log("id: " + id, " type: " + typeof id);
+    } else {
+      routes.forEach((route) => {
+        console.log("check: ", currentPath === route.path);
+        if (currentPath === route.path) {
+          flag = 1;
+
+          store.dispatch({
+            type: "SET_ROUTE",
+            payload: {
+              route: currentPath,
+            },
+          });
+        }
+      });
+    }
+
+    if (flag === 0) {
+      console.log("ERRORORR: ", currentPath);
+      store.dispatch({
+        type: "SET_ROUTE",
+        payload: {
+          route: "/error",
+        },
+      });
+    }
+  }
+
+  function getCurrentPath(): string {
+    const pathname = window.location.hash.slice(1);
+
+    if (pathname) {
+      console.log("=== pathname: ", pathname);
+
+      return pathname;
+    } else {
+      return "/home";
+    }
+  }
+
+  window.addEventListener("popstate", (e) => {
+    e.preventDefault();
+    console.log("popstate clicked");
+
+    changeRoute();
+  });
+
+  return {
+    register,
+    navigate,
+    changeRoute,
+  };
+}

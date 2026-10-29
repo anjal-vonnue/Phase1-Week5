@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "es2022",
+    "module": "es2022",
+
+    "outDir": "./dist",
+    "rootDir": "./js",
+
+    "declaration": true,
+    "skipLibCheck": true,
+
+    "paths": {
+      "@pages/*": ["./js/pages/*"],
+      "@components/*": ["./js/components/*"]
+    }
+  },
+  "include": ["js/**/*"],
+  "exclude": ["**/*.test.ts", "node_modules", "dist"]
+}
